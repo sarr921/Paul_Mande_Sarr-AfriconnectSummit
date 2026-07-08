@@ -233,3 +233,51 @@ img {
         display: block;
     }
 }
+/* ==========================================================================
+   INTERACTIONS NAVBAR DYNAMIQUES (Commit 2 Additions)
+   ========================================================================== */
+
+/* État de la navbar après 80px de scroll (Effet Glassmorphism 2026) */
+.header-global.scrolled {
+    background-color: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .header-global.scrolled {
+    background-color: rgba(11, 15, 25, 0.75);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Modification responsive pour le menu mobile actif */
+@media (max-width: 768px) {
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: var(--navbar-height);
+        left: -100%; /* Caché par défaut à gauche */
+        width: 100%;
+        height: calc(100vh - var(--navbar-height));
+        background-color: var(--bg-primary);
+        padding: 40px 24px;
+        gap: 24px;
+        align-items: flex-start;
+        transition: var(--transition-smooth);
+        border-top: 1px solid var(--border-color);
+        z-index: 999;
+    }
+
+    /* Classe injectée par le JS pour ouvrir le menu */
+    .nav-links.mobile-active {
+        left: 0;
+    }
+
+    .nav-item {
+        font-size: 1.5rem; /* Plus grand sur mobile pour l'accessibilité tactile */
+        width: 100%;
+    }
+}
