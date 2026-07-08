@@ -153,3 +153,98 @@ function initCountdown() {
     // Mettre à jour toutes les secondes
     const countdownInterval = setInterval(updateCountdown, 1000);
 }
+// Ajoutez ces initialisations dans le bloc 'DOMContentLoaded' existant :
+document.addEventListener('DOMContentLoaded', () => {
+    initDarkMode();
+    initNavbarScroll();
+    initMobileMenu();
+    initFooterYear();
+    initCountdown();
+    
+    initScrollAnimations(); // <-- AJOUT DU COMMIT 4
+    initBackToTop();        // <-- AJOUT DU COMMIT 4
+});
+
+/**
+ * 6. ANIMATIONS AU SCROLL & COMPTEURS NUMÉRIQUES
+ * Utilise IntersectionObserver pour détecter l'entrée des sections à l'écran.
+ */
+function initScrollAnimations() {
+    const sections = document.querySelectorAll('.section-reveal');
+    
+    const observerOptions = {
+        root: null,
+        threshold: 0.15 // Déclenche quand 15% de la section est visible
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                
+                // Si la section contient des compteurs de statistiques, on les lance
+                const statNumbers = entry.target.querySelectorAll('.stat-number');
+                if (statNumbers.length > 0) {
+                    statNumbers.forEach(num => animateCounter(num));
+                }
+                
+                // Une fois animée, on arrête d'observer cette section
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+}
+
+/**
+ * Fonction d'incrémentation fluide pour les chiffres clés
+ */
+function animateCounter(element) {
+    const target = parseInt(element.getAttribute('data-target'), 10);
+    const duration = 1500; // Durée totale de l'animation en ms
+    const startTime = performance.now();
+
+    function updateNumber(currentTime) {
+        const elapsedTime = currentTime - startTime;
+        const progress = Math.min(elapsedTime / duration, 1);
+        
+        // Formule d'accélération/décélération simple (Ease-out)
+        const easedProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        const currentValue = Math.floor(easedProgress * target);
+
+        // Ajout du signe "+" pour le premier compteur de 1200+ participants
+        element.textContent = target >= 1000 ? `+${currentValue}` : currentValue;
+
+        if (progress < 1) {
+            requestAnimationFrame(updateNumber);
+        } else {
+            element.textContent = target >= 1000 ? `+${target}` : target;
+        }
+    }
+
+    requestAnimationFrame(updateNumber);
+}
+
+/**
+ * 7. BOUTON RETOUR EN HAUT (BACK TO TOP)
+ */
+function initBackToTop() {
+    const backTopBtn = document.getElementById('back-to-top');
+    if (!backTopBtn) return;
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backTopBtn.classList.add('show');
+        } else {
+            backTopBtn.classList.remove('show');
+        }
+    });
+
+    backTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}

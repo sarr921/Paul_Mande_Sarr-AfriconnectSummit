@@ -452,3 +452,228 @@ img {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+/* ==========================================================================
+   CONSTRUCTION DES SECTIONS DE L'ACCUEIL (Commit 4)
+   ========================================================================== */
+.section-reveal {
+    padding: 100px 0;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Classe injectée par JavaScript quand l'élément entre à l'écran */
+.section-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-title {
+    font-family: var(--font-title);
+    font-size: 2.2rem;
+    margin-bottom: 48px;
+    letter-spacing: -1px;
+}
+
+.text-center { text-align: center; }
+
+/* 1. Chiffres Clés - Usage CSS Grid (2) */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.stat-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 40px 24px;
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.stat-number {
+    font-family: var(--font-title);
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* 2. Pourquoi Participer - Usage Flexbox (4) */
+.features-flex {
+    display: flex;
+    gap: 32px;
+}
+
+.feature-card {
+    flex: 1;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    padding: 40px;
+    border-radius: var(--radius-md);
+    transition: var(--transition-smooth);
+}
+
+.feature-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: 24px;
+}
+
+.feature-card h3 {
+    font-family: var(--font-title);
+    margin-bottom: 16px;
+    font-size: 1.3rem;
+}
+
+.feature-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* 3. Intervenants Vedettes - Usage CSS Grid (3) */
+.section-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 48px;
+}
+
+.section-header-flex .section-title { margin-bottom: 0; }
+.btn-sm { padding: 8px 20px; font-size: 0.9rem; }
+
+.speakers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.speaker-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+.speaker-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.05);
+    border-color: var(--accent);
+}
+
+.speaker-img-wrapper {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background-color: var(--border-color);
+}
+
+.speaker-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.speaker-card:hover .speaker-img-wrapper img {
+    transform: scale(1.05);
+}
+
+.speaker-info {
+    padding: 24px;
+}
+
+.speaker-info h3 {
+    font-family: var(--font-title);
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
+
+.speaker-role {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+.speaker-country {
+    font-size: 0.85rem;
+    background-color: var(--bg-primary);
+    padding: 4px 10px;
+    border-radius: 100px;
+    border: 1px solid var(--border-color);
+}
+
+/* 4. Partenaires / Sponsors */
+.sponsors-tier {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.sponsor-logo {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.tier-gold .sponsor-logo { padding: 24px 48px; font-size: 1.3rem; color: var(--text-primary); }
+.tier-silver .sponsor-logo { padding: 18px 36px; font-size: 1rem; }
+.tier-bronze .sponsor-logo { padding: 12px 24px; font-size: 0.85rem; }
+
+/* 5. Bouton Flottant (Back to Top) */
+.back-to-top {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: var(--transition-smooth);
+    z-index: 99;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* RESPONSIVE MEDIA QUERIES (Breakpoints) */
+@media (max-width: 1024px) {
+    .stats-grid, .speakers-grid { grid-template-columns: repeat(2, 1fr); }
+    .features-flex { flex-direction: column; }
+}
+
+@media (max-width: 560px) {
+    .stats-grid, .speakers-grid { grid-template-columns: 1fr; }
+    .section-header-flex { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
