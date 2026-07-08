@@ -1,17 +1,40 @@
 /* ==========================================================================
-   AFRICONNECT SUMMIT 2026 - CORE JAVASCRIPT (Commit 2)
+   AFRICONNECT SUMMIT 2026 - MAIN JAVASCRIPT (Unified, Secured & Fixed)
    ========================================================================== */
 
+// POINT D'ENTRÉE UNIQUE - Initialisation globale et sécurisée
 document.addEventListener('DOMContentLoaded', () => {
-    initDarkMode();
-    initNavbarScroll();
-    initMobileMenu();
-    initFooterYear();
+    // 1. Priorité absolue : Gestion du Thème (Sombre / Clair)
+    try { 
+        initDarkMode(); 
+    } catch (error) { 
+        console.error("Erreur Initialisation DarkMode:", error); 
+    }
+
+    // 2. Initialisation des autres fonctionnalités isolées pour éviter les blocages inter-pages
+    const modules = [
+        { name: "Navbar Scroll", func: initNavbarScroll },
+        { name: "Mobile Menu", func: initMobileMenu },
+        { name: "Footer Year", func: initFooterYear },
+        { name: "Countdown", func: initCountdown },
+        { name: "Scroll Animations", func: initScrollAnimations },
+        { name: "Back To Top", func: initBackToTop },
+        { name: "Program Tabs", func: initProgramTabs }
+    ];
+
+    modules.forEach(module => {
+        try {
+            module.func();
+        } catch (error) {
+            // Log discret en console utile pour le développement
+            console.warn(`Module [${module.name}] non chargé sur cette page.`);
+        }
+    });
 });
 
 /**
  * 1. DARK / LIGHT MODE
- * Gère la bascule de thème, l'icône et la persistance dans le localStorage.
+ * Gère le stockage local et force la synchronisation de l'état visuel.
  */
 function initDarkMode() {
     const themeToggle = document.getElementById('theme-toggle');
@@ -19,40 +42,36 @@ function initDarkMode() {
 
     const icon = themeToggle.querySelector('i');
     
-    // 1. Vérifier s'il y a un choix enregistré, sinon lire les préférences système
+    // Récupère le thème enregistré ou applique le mode "dark" par défaut
     const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const currentTheme = savedTheme || 'dark';
     
-    // Déterminer le thème initial (priorité au localStorage)
-    const currentTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
-    
-    // Appliquer le thème initial au démarrage
+    // Application immédiate au document HTML
     document.documentElement.setAttribute('data-theme', currentTheme);
     updateThemeIcon(icon, currentTheme);
 
-    // 2. Écouteur de clic pour changer de thème
-    themeToggle.addEventListener('click', () => {
+    // Écouteur de clic pour la bascule dynamique
+    themeToggle.onclick = function() {
         const activeTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
         
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         updateThemeIcon(icon, newTheme);
-    });
+    };
 }
 
 function updateThemeIcon(iconElement, theme) {
     if (!iconElement) return;
     if (theme === 'dark') {
-        iconElement.className = 'bi bi-sun-fill'; // Icône Soleil en mode sombre pour repasser au clair
+        iconElement.className = 'bi bi-sun-fill'; // Affiche le soleil en mode sombre
     } else {
-        iconElement.className = 'bi bi-moon-stars-fill'; // Icône Lune en mode clair
+        iconElement.className = 'bi bi-moon-stars-fill'; // Affiche la lune en mode clair
     }
 }
 
 /**
  * 2. NAVBAR DYNAMIQUE AU SCROLL
- * Ajoute un fond flouté et une ombre dès que l'utilisateur défile de plus de 80px.
  */
 function initNavbarScroll() {
     const header = document.querySelector('.header-global');
@@ -69,7 +88,6 @@ function initNavbarScroll() {
 
 /**
  * 3. MENU HAMBURGER MOBILE
- * Gère l'affichage et le masquage de la navigation sur les petits écrans.
  */
 function initMobileMenu() {
     const menuBurger = document.getElementById('menu-burger');
@@ -78,16 +96,14 @@ function initMobileMenu() {
 
     const icon = menuBurger.querySelector('i');
 
-    menuBurger.addEventListener('click', () => {
+    menuBurger.onclick = function() {
         navLinks.classList.toggle('mobile-active');
-        
-        // Change l'icône (Menu liste ou fermeture "X")
         if (navLinks.classList.contains('mobile-active')) {
             icon.className = 'bi bi-xlg';
         } else {
             icon.className = 'bi bi-list';
         }
-    });
+    };
 }
 
 /**
@@ -99,24 +115,12 @@ function initFooterYear() {
         yearSpan.textContent = new Date().getFullYear();
     }
 }
-// Ajoutez 'initCountdown();' à l'intérieur du bloc initial 'DOMContentLoaded' existant :
-document.addEventListener('DOMContentLoaded', () => {
-    initDarkMode();
-    initNavbarScroll();
-    initMobileMenu();
-    initFooterYear();
-    initCountdown(); // <-- AJOUT DU COMMIT 3
-});
 
 /**
  * 5. COMPTE À REBOURS EN TEMPS RÉEL
- * Calcule dynamiquement le temps restant jusqu'à la date de l'événement cible.
  */
 function initCountdown() {
-    // Définir la date cible fictive (12 Novembre 2026)
     const targetDate = new Date('November 12, 2026 09:00:00').getTime();
-
-    // Sélectionner les éléments du DOM
     const daysEl = document.getElementById('days');
     const hoursEl = document.getElementById('hours');
     const minutesEl = document.getElementById('minutes');
@@ -128,67 +132,53 @@ function initCountdown() {
         const now = new Date().getTime();
         const difference = targetDate - now;
 
-        // Si la date est dépassée
         if (difference < 0) {
-            document.querySelector('.countdown-wrapper').innerHTML = "<p class="countdown-title">Le Sommet est en cours ! 🔥</p>";
+            const wrapper = document.querySelector('.countdown-wrapper');
+            if (wrapper) {
+                wrapper.innerHTML = `<p class="countdown-title">Le Sommet est en cours ! 🔥</p>`;
+            }
             clearInterval(countdownInterval);
             return;
         }
 
-        // Calculs des composants temporels
         const days = Math.floor(difference / (1000 * 60 * 60 * 24));
         const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-        // Injection dans le DOM avec formatage (ex: 09 au lieu de 9)
         daysEl.textContent = days < 10 ? '0' + days : days;
         hoursEl.textContent = hours < 10 ? '0' + hours : hours;
         minutesEl.textContent = minutes < 10 ? '0' + minutes : minutes;
         secondsEl.textContent = seconds < 10 ? '0' + seconds : seconds;
     }
 
-    // Lancer une première exécution immédiate pour éviter le saut à l'affichage
     updateCountdown();
-    // Mettre à jour toutes les secondes
     const countdownInterval = setInterval(updateCountdown, 1000);
 }
-// Ajoutez ces initialisations dans le bloc 'DOMContentLoaded' existant :
-document.addEventListener('DOMContentLoaded', () => {
-    initDarkMode();
-    initNavbarScroll();
-    initMobileMenu();
-    initFooterYear();
-    initCountdown();
-    
-    initScrollAnimations(); // <-- AJOUT DU COMMIT 4
-    initBackToTop();        // <-- AJOUT DU COMMIT 4
-});
 
 /**
- * 6. ANIMATIONS AU SCROLL & COMPTEURS NUMÉRIQUES
- * Utilise IntersectionObserver pour détecter l'entrée des sections à l'écran.
+ * 6. ANIMATIONS AU SCROLL (Intersection Observer)
  */
 function initScrollAnimations() {
     const sections = document.querySelectorAll('.section-reveal');
+    if (sections.length === 0) return; 
     
     const observerOptions = {
         root: null,
-        threshold: 0.15 // Déclenche quand 15% de la section est visible
+        threshold: 0.1,
+        rootMargin: "0px 0px -30px 0px"
     };
 
-    const observer = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
                 
-                // Si la section contient des compteurs de statistiques, on les lance
                 const statNumbers = entry.target.querySelectorAll('.stat-number');
                 if (statNumbers.length > 0) {
                     statNumbers.forEach(num => animateCounter(num));
                 }
                 
-                // Une fois animée, on arrête d'observer cette section
                 observer.unobserve(entry.target);
             }
         });
@@ -198,22 +188,23 @@ function initScrollAnimations() {
 }
 
 /**
- * Fonction d'incrémentation fluide pour les chiffres clés
+ * INC-RÉMENTATION DES COMPTEURS NUMÉRIQUES
  */
 function animateCounter(element) {
+    if (element.classList.contains('animated')) return;
+    element.classList.add('animated');
+
     const target = parseInt(element.getAttribute('data-target'), 10);
-    const duration = 1500; // Durée totale de l'animation en ms
+    const duration = 1500; 
     const startTime = performance.now();
 
     function updateNumber(currentTime) {
         const elapsedTime = currentTime - startTime;
         const progress = Math.min(elapsedTime / duration, 1);
         
-        // Formule d'accélération/décélération simple (Ease-out)
         const easedProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
         const currentValue = Math.floor(easedProgress * target);
 
-        // Ajout du signe "+" pour le premier compteur de 1200+ participants
         element.textContent = target >= 1000 ? `+${currentValue}` : currentValue;
 
         if (progress < 1) {
@@ -241,10 +232,36 @@ function initBackToTop() {
         }
     });
 
-    backTopBtn.addEventListener('click', () => {
+    backTopBtn.onclick = function() {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
+        });
+    };
+}
+
+/**
+ * 8. ONGLETS INTERACTIFS DU PROGRAMME
+ */
+function initProgramTabs() {
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    if (tabButtons.length === 0 || tabPanels.length === 0) return;
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetId = button.getAttribute('data-target');
+
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabPanels.forEach(panel => panel.classList.remove('active'));
+
+            button.classList.add('active');
+            const targetPanel = document.getElementById(targetId);
+            
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+            }
         });
     });
 }

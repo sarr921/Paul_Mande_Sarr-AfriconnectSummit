@@ -22,14 +22,23 @@
     --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     --navbar-height: 80px;
 }
-
-/* Dark Mode Overrides */
+/* ==========================================================================
+   DARK MODE OVERRIDES (Version Prioritaire)
+   ========================================================================== */
+html[data-theme="dark"], 
 [data-theme="dark"] {
-    --bg-primary: #0b0f19;
-    --bg-secondary: #161b26;
-    --text-primary: #f3f4f6;
-    --text-secondary: #9ca3af;
-    --border-color: #242b3d;
+    --bg-primary: #0b0f19 !important;
+    --bg-secondary: #161b26 !important;
+    --text-primary: #f3f4f6 !important;
+    --text-secondary: #9ca3af !important;
+    --border-color: #242b3d !important;
+}
+
+/* Force le rafraîchissement global du fond du corps */
+html, body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ==========================================================================
@@ -676,4 +685,186 @@ img {
 @media (max-width: 560px) {
     .stats-grid, .speakers-grid { grid-template-columns: 1fr; }
     .section-header-flex { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
+/* ==========================================================================
+   PAGE PROGRAMME - STYLES (Commit 5)
+   ========================================================================== */
+.internal-hero {
+    background-color: var(--bg-secondary);
+    padding: 60px 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 60px;
+}
+
+.breadcrumb {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb span { color: var(--text-primary); font-weight: 500; }
+
+.internal-title {
+    font-family: var(--font-title);
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+}
+
+.internal-subtitle {
+    color: var(--text-secondary);
+    max-width: 700px;
+    line-height: 1.6;
+}
+
+/* Onglets (Tabs Layout) */
+.tabs-container {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 16px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    text-align: left;
+    border-radius: var(--radius-sm);
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-btn:hover { background-color: var(--bg-secondary); }
+
+.tab-btn.active {
+    background-color: var(--accent);
+}
+
+.tab-btn.active .tab-day, .tab-btn.active .tab-date {
+    color: #ffffff;
+}
+
+.tab-day {
+    font-family: var(--font-title);
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+}
+
+.tab-date {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+/* Gestion de l'affichage des panneaux (Tabs Display System) */
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Tableaux Stylisés */
+.table-wrapper {
+    overflow-x: auto; /* Empêche la casse sur mobile */
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-primary);
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.schedule-table th, .schedule-table td {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.schedule-table th {
+    background-color: var(--bg-secondary);
+    font-family: var(--font-title);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Alternance de couleurs exigée (Zebra Striping) */
+.schedule-table tbody tr:nth-child(even) {
+    background-color: var(--bg-secondary);
+}
+
+.schedule-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.time-col {
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+}
+
+.session-title {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.speaker-col {
+    font-weight: 500;
+}
+
+/* Section Thématiques - Usage CSS Grid (4) : Grille 2x2 */
+.topics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+}
+
+.topic-item {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 40px;
+    border-radius: var(--radius-md);
+    transition: var(--transition-smooth);
+}
+
+.topic-item:hover {
+    border-color: var(--accent-secondary);
+    transform: scale(1.01);
+}
+
+.topic-icon {
+    font-size: 2rem;
+    color: var(--accent-secondary);
+    margin-bottom: 20px;
+}
+
+.topic-item h3 {
+    font-family: var(--font-title);
+    margin-bottom: 12px;
+}
+
+.topic-item p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Responsive local du programme */
+@media (max-width: 768px) {
+    .tabs-container { flex-direction: column; }
+    .topics-grid { grid-template-columns: 1fr; }
+    .schedule-table th, .schedule-table td { padding: 14px 16px; font-size: 0.85rem; }
 }

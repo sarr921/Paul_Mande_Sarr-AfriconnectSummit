@@ -40,9 +40,206 @@
     </header>
 
     <main id="main-content">
-        <section class="container" style="padding: 100px 0;">
-            <p>Structure initiale prête. Fondations du design système activées.</p>
+
+        <section class="internal-hero">
+            <div class="container">
+                <nav class="breadcrumb" aria-label="Fil d'Ariane">
+                    <a href="index.html">Accueil</a> <i class="bi bi-chevron-right"></i> <span>Programme</span>
+                </nav>
+                <h1 class="internal-title">L'Agenda du Sommet</h1>
+                <p class="internal-subtitle">Explorez 3 jours de conférences intensives, de panels de haut niveau et de workshops pratiques.</p>
+            </div>
         </section>
+
+        <section class="schedule-section container">
+            
+            <div class="tabs-container">
+                <button class="tab-btn active" data-target="jour1">
+                    <span class="tab-day">Jour 1</span>
+                    <span class="tab-date">12 Nov 2026</span>
+                </button>
+                <button class="tab-btn" data-target="jour2">
+                    <span class="tab-day">Jour 2</span>
+                    <span class="tab-date">13 Nov 2026</span>
+                </button>
+                <button class="tab-btn" data-target="jour3">
+                    <span class="tab-day">Jour 3</span>
+                    <span class="tab-date">14 Nov 2026</span>
+                </button>
+            </div>
+
+            <div class="schedule-content">
+                
+                <div class="tab-panel active" id="jour1">
+                    <div class="table-wrapper">
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th><i class="bi bi-clock"></i> Heure</th>
+                                    <th><i class="bi bi-journal-text"></i> Session</th>
+                                    <th><i class="bi bi-person"></i> Intervenant</th>
+                                    <th><i class="bi bi-geo"></i> Salle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="time-col">08h30 - 09h30</td>
+                                    <td class="session-title">Accueil des participants & Enregistrement</td>
+                                    <td>—</td>
+                                    <td>Hall Principal</td>
+                                </tr>
+                                <tr>
+                                    <td class="time-col">09h30 - 11h00</td>
+                                    <td class="session-title">Keynote d'ouverture : L'infrastructure Tech Africaine en 2026</td>
+                                    <td class="speaker-col">Amina Diop</td>
+                                    <td>Amphithéâtre Kédougou</td>
+                                </tr>
+                                <tr>
+                                    <td class="time-col">11h30 - 13h00</td>
+                                    <td class="session-title">Table Ronde : La souveraineté des données sur le continent</td>
+                                    <td class="speaker-col">Panel d'Experts</td>
+                                    <td>Salle Gorée (Tech)</td>
+                                </tr>
+                                <tr>
+                                    <td class="time-col">14h30 - 16h00</td>
+                                    <td class="session-title">Workshop : Déployer des modèles IA open-source locaux</td>
+                                    <td class="speaker-col">Dr. Nonso Okafor</td>
+                                    <td>Lab Numérique</td>
+                                </tr>
+                                <tr>
+                                    <td class="time-col">16h30 - 18h00</td>
+                                    <td class="session-title">Pitch Session : Startups d'Afrique de l'Ouest</td>
+                                    <td class="speaker-col">Jury Investisseurs</td>
+                                    <td>Amphithéâtre Kédougou</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-panel" id="jour2">
+                    <div class="table-wrapper">
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>Heure</th>
+                                    <th>Session</th>
+                                    <th>Intervenant</th>
+                                    <th>Salle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="time-col">09h00 - 10h30</td>
+                                    <td class="session-title">L'essor de la FinTech et l'interopérabilité des paiements</td>
+                                    <td class="speaker-col">Samuel Mensah</td>
+                                    <td>Amphithéâtre Kédougou</td>
+                                </tr>
+                                <tr>
+                                    <td class="time-col">11h00 - 12h30</td>
+                                    <td class="session-title">Masterclass : Sécuriser les architectures Cloud décentralisées</td>
+                                    <td class="speaker-col">Chantal Munene</td>
+                                    <td>Salle Gorée (Tech)</td>
+                                </tr>
+                                <tr>
+                                    <td class="time-col">14h00 - 15h30</td>
+                                    <td class="session-title">Le futur de la Web3 et du Gaming en Afrique</td>
+                                    <td class="speaker-col">Kofi Mensah</td>
+                                    <td>Lab Numérique</td>
+                                </tr>
+                                <tr>
+                                    <td class="time-col">15h45 - 17h00</td>
+                                    <td class="session-title">Financement Early-Stage : Ce que veulent les VC en 2026</td>
+                                    <td class="speaker-col">Sarah Vandor</td>
+                                    <td>Salle Almadies (Biz)</td>
+                                </tr>
+                                <tr>
+                                    <td class="time-col">17h00 - 18h30</td>
+                                    <td class="session-title">Session Networking & Cocktails B2B</td>
+                                    <td>—</td>
+                                    <td>Espace Sponsor</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-panel" id="jour3">
+                    <div class="table-wrapper">
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>Heure</th>
+                                    <th>Session</th>
+                                    <th>Intervenant</th>
+                                    <th>Salle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="time-col">09h30 - 11h00</td>
+                                    <td class="session-title">UI/UX pour l'Afrique : Concevoir pour des connexions asymétriques</td>
+                                    <td class="speaker-col">Fatoumata Ba</td>
+                                    <td>Lab Numérique</td>
+                                </tr>
+                                <tr>
+                                    <td class="time-col">11h30 - 13h00</td>
+                                    <td class="session-title">Green Tech : Relever le défi énergétique des datacenters</td>
+                                    <td class="speaker-col">Ousmane Cissé</td>
+                                    <td>Salle Gorée (Tech)</td>
+                                </tr>
+                                <tr>
+                                    <td class="time-col">14h30 - 16h00</td>
+                                    <td class="session-title">Table Ronde Clôture : Feuille de route panafricaine 2030</td>
+                                    <td class="speaker-col">Tous les Ministres & Décideurs</td>
+                                    <td>Amphithéâtre Kédougou</td>
+                                </tr>
+                                <tr>
+                                    <td class="time-col">16h00 - 17h00</td>
+                                    <td class="session-title">Remise des prix du Hackathon AfriConnect</td>
+                                    <td class="speaker-col">Comité d'Organisation</td>
+                                    <td>Amphithéâtre Kédougou</td>
+                                </tr>
+                                <tr>
+                                    <td class="time-col">17h00 - 18h00</td>
+                                    <td class="session-title">Cérémonie de clôture & Remerciements</td>
+                                    <td>—</td>
+                                    <td>Hall Principal</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="topics-section section-reveal container">
+            <h2 class="section-title text-center">Les Piliers Thématiques</h2>
+            <div class="topics-grid">
+                <div class="topic-item">
+                    <div class="topic-icon"><i class="bi bi-cpu"></i></div>
+                    <h3>Intelligence Artificielle & Cloud</h3>
+                    <p>Modèles LLM locaux, Edge Computing et souveraineté numérique sur les données africaines.</p>
+                </div>
+                <div class="topic-item">
+                    <div class="topic-icon"><i class="bi bi-wallet2"></i></div>
+                    <h3>FinTech & Inclusion Financière</h3>
+                    <p>Interopérabilité transfrontalière, monnaies numériques de banque centrale (MNBC) et micro-finance.</p>
+                </div>
+                <div class="topic-item">
+                    <div class="topic-icon"><i class="bi bi-palette"></i></div>
+                    <h3>Design System & UX Localisée</h3>
+                    <p>Méthodologies de design adaptées aux réalités d'accessibilité et d'usages des populations mobiles.</p>
+                </div>
+                <div class="topic-item">
+                    <div class="topic-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                    <h3>Venture Capital & Scale-Up</h3>
+                    <p>Stratégies d'investissement, fusions-acquisitions et mécanismes de croissance pour les scale-ups du continent.</p>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer class="footer-global">
