@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AfriConnect Summit 2026 | Accueil</title>
+    <title>AfriConnect Summit 2026 | Contact</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,10 +22,10 @@
             </a>
             
             <nav class="nav-links" aria-label="Navigation principale">
-                <a href="index.html" class="nav-item active">Accueil</a>
+                <a href="index.html" class="nav-item">Accueil</a>
                 <a href="programme.html" class="nav-item">Programme</a>
                 <a href="intervenants.html" class="nav-item">Intervenants</a>
-                <a href="contact.html" class="nav-item">Inscription</a>
+                <a href="contact.html" class="nav-item active">Inscription</a>
             </nav>
             
             <div class="nav-actions">
@@ -40,9 +40,147 @@
     </header>
 
     <main id="main-content">
-        <section class="container" style="padding: 100px 0;">
-            <p>Structure initiale prête. Fondations du design système activées.</p>
+
+        <section class="internal-hero">
+            <div class="container">
+                <nav class="breadcrumb" aria-label="Fil d'Ariane">
+                    <a href="index.html">Accueil</a> <i class="bi bi-chevron-right"></i> <span>Contact</span>
+                </nav>
+                <h1 class="internal-title">Contactez-nous</h1>
+                <p class="internal-subtitle">Une question sur les inscriptions, les partenariats ou le programme ? Notre équipe vous répond sous 24h.</p>
+            </div>
         </section>
+
+        <section class="contact-section container">
+            <div class="contact-grid">
+                
+                <div class="contact-form-wrapper">
+                    <h2>Envoyer un message</h2>
+                    <form id="contact-form" novalidate>
+                        <div class="form-group">
+                            <label for="contact-name">Nom complet <span class="required">*</span></label>
+                            <input type="text" id="contact-name" name="name" required minlength="3" placeholder="Ex: Fatou Diop">
+                            <span class="error-msg" id="name-error">Le nom doit contenir au moins 3 caractères.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-email">Adresse Email <span class="required">*</span></label>
+                            <input type="email" id="contact-email" name="email" required placeholder="Ex: fatou@gmail.com">
+                            <span class="error-msg" id="email-error">Veuillez entrer une adresse email valide.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-subject">Sujet <span class="required">*</span></label>
+                            <select id="contact-subject" name="subject" required>
+                                <option value="" disabled selected>Choisissez une option...</option>
+                                <option value="inscription">Inscription & Billetterie</option>
+                                <option value="partenariat">Devenir Sponsor / Partenaire</option>
+                                <option value="presse">Presse & Médias</option>
+                                <option value="autre">Autre demande</option>
+                            </select>
+                            <span class="error-msg" id="subject-error">Veuillez sélectionner un sujet.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-message">Votre Message <span class="required">*</span></label>
+                            <textarea id="contact-message" name="message" required minlength="15" rows="6" placeholder="Écrivez votre message ici (15 caractères minimum)..."></textarea>
+                            <span class="error-msg" id="message-error">Votre message doit contenir au moins 15 caractères.</span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            Envoyer le message <i class="bi bi-send"></i>
+                        </button>
+                    </form>
+                    
+                    <div id="form-status" class="form-status-box" style="display: none;"></div>
+                </div>
+
+                <div class="contact-info-wrapper">
+                    <h2>Informations Pratiques</h2>
+                    <div class="info-card-list">
+                        <div class="info-item-card">
+                            <div class="info-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                            <div class="info-text">
+                                <h3>Lieu de l'événement</h3>
+                                <p>Centre International de Conférences Abdou Diouf (CICAD), Dakar, Sénégal.</p>
+                            </div>
+                        </div>
+                        <div class="info-item-card">
+                            <div class="info-icon"><i class="bi bi-envelope-open-fill"></i></div>
+                            <div class="info-text">
+                                <h3>Email Secrétariat</h3>
+                                <p><a href="mailto:contact@africonnect2026.com">contact@africonnect2026.com</a></p>
+                            </div>
+                        </div>
+                        <div class="info-item-card">
+                            <div class="info-icon"><i class="bi bi-telephone-fill"></i></div>
+                            <div class="info-text">
+                                <h3>Téléphone / WhatsApp</h3>
+                                <p><a href="tel:+221778000000">+221 77 800 00 00</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3859.479536139478!2d-17.227282424208573!3d14.741982773604085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec1bc1001c38555%3A0xad5b412bfa4ca15f!2sCentre%20International%20de%20Conf%C3%A9rences%20Abdou%20Diouf%20(CICAD)!5e0!3m2!1sfr!2ssn!4v1710000000000!5m2!1sfr!2ssn" 
+                            width="100%" 
+                            height="250" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Carte de localisation du CICAD - AfriConnect 2026">
+                        </iframe>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="faq-section section-reveal container">
+            <h2 class="section-title text-center">Foire Aux Questions</h2>
+            <div class="accordion-container">
+                
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span>Le sommet est-il accessible en distanciel ?</span>
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                    <div class="accordion-collapse">
+                        <div class="accordion-body">
+                            <p>Oui, absolument ! Toutes les keynotes de l'Amphithéâtre Kédougou et les tables rondes feront l'objet d'une diffusion en streaming HD accessible pour les détenteurs d'un pass Digital.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span>Comment puis-je obtenir un justificatif de paiement ?</span>
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                    <div class="accordion-collapse">
+                        <div class="accordion-body">
+                            <p>Une facture nominative acquittée est envoyée automatiquement au format PDF par email immédiatement après la validation de votre paiement en ligne.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span>Quels sont les modes de paiement acceptés ?</span>
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                    <div class="accordion-collapse">
+                        <div class="accordion-body">
+                            <p>Nous acceptons les cartes bancaires internationales (Visa, MasterCard), ainsi que les solutions de Mobile Money majeures (Wave, Orange Money, MTN MoMo) via notre passerelle sécurisée AfroPay.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
     <footer class="footer-global">

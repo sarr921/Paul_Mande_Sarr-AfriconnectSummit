@@ -316,3 +316,85 @@ function initSpeakerFilters() {
     searchInput.addEventListener('input', filterSpeakers);
     countryFilter.addEventListener('change', filterSpeakers);
 }
+// ÉTAPE INTERNE À RAJOUTER DANS LE TABLEAU "modules" AU SOMMET :
+// { name: "Contact Form", func: initContactForm },
+// { name: "FAQ Accordion", func: initAccordion }
+
+/**
+ * 10. VALIDATION DU FORMULAIRE DE CONTACT
+ * Bloque l'envoi en cas d'erreurs et affiche des retours visuels précis.
+ */
+function initContactForm() {
+    const form = document.getElementById('contact-form');
+    const statusBox = document.getElementById('form-status');
+    if (!form || !statusBox) return;
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault(); // Empêche le rechargement par défaut
+        
+        let isFormValid = true;
+        const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+
+        inputs.forEach(input => {
+            const parent = input.parentElement;
+            // Utilisation de validity check natif HTML5
+            if (!input.checkValidity()) {
+                parent.classList.add('invalid');
+                isFormValid = false;
+            } else {
+                parent.classList.remove('invalid');
+            }
+        });
+
+        if (isFormValid) {
+            statusBox.className = "form-status-box success";
+            statusBox.innerHTML = `<i class="bi bi-check-circle-fill"></i> Merci ! Votre message a bien été envoyé avec succès.`;
+            statusBox.style.display = "block";
+            form.reset(); // Vide le formulaire
+        } else {
+            statusBox.className = "form-status-box error";
+            statusBox.innerHTML = `<i class="bi bi-exclamation-triangle-fill"></i> Veuillez corriger les erreurs dans le formulaire avant l'envoi.`;
+            statusBox.style.display = "block";
+        }
+    });
+
+    // Nettoyer l'état d'erreur en temps réel dès que l'utilisateur corrige sa saisie
+    form.querySelectorAll('input, select, textarea').forEach(element => {
+        element.addEventListener('input', () => {
+            if (element.checkValidity()) {
+                element.parentElement.classList.remove('invalid');
+            }
+        });
+    });
+}
+
+/**
+ * 11. FAQ ACCORDÉON ANIMÉ
+ * Calcule dynamiquement la hauteur pour assurer une transition CSS fluide.
+ */
+function initAccordion() {
+    const headers = document.querySelectorAll('.accordion-header');
+    if (headers.length === 0) return;
+
+    headers.forEach(header => {
+        header.addEventListener('click', () => {
+            const item = header.parentElement;
+            const collapse = item.querySelector('.accordion-collapse');
+            const isActive = item.classList.contains('active');
+
+            // Fermer tous les autres éléments ouverts (Accordéon strict)
+            document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                otherItem.classList.remove('active');
+                otherItem.querySelector('.accordion-collapse').style.maxHeight = null;
+                otherItem.querySelector('.accordion-header').setAttribute('aria-expanded', 'false');
+            });
+
+            // Si l'élément cliqué n'était pas actif, on l'ouvre
+            if (!isActive) {
+                item.classList.add('active');
+                collapse.style.maxHeight = collapse.scrollHeight + "px"; // Hauteur réelle en pixels
+                header.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+}
