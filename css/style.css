@@ -868,3 +868,155 @@ img {
     .topics-grid { grid-template-columns: 1fr; }
     .schedule-table th, .schedule-table td { padding: 14px 16px; font-size: 0.85rem; }
 }
+/* ==========================================================================
+   PAGE INTERVENANTS - GALERIE & FILTRES (Commit 6)
+   ========================================================================== */
+.filter-section {
+    margin-bottom: 48px;
+}
+
+.filter-wrapper {
+    display: flex;
+    gap: 16px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 16px;
+    border-radius: var(--radius-md);
+}
+
+.search-box, .select-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 0 16px;
+}
+
+.search-box { flex: 2; }
+.select-box { flex: 1; }
+
+.search-box i, .select-box i {
+    color: var(--text-secondary);
+    margin-right: 12px;
+}
+
+.search-box input, .select-box select {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 14px 0;
+    color: var(--text-primary);
+    font-size: 1rem;
+    outline: none;
+}
+
+.select-box select {
+    cursor: pointer;
+    appearance: none; /* Supprime la flèche par défaut */
+}
+
+/* Modifiez cette règle dans votre CSS : */
+.speakers-full-grid {
+    display: grid;
+    /* Force 4 colonnes égales sur grand écran */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 32px;
+    margin-bottom: 80px;
+}
+
+/* Version responsive pour éviter que les cartes soient trop écrasées sur tablette et mobile */
+@media (max-width: 1024px) {
+    .speakers-full-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 par ligne sur tablette */
+    }
+}
+
+@media (max-width: 600px) {
+    .speakers-full-grid {
+        grid-template-columns: 1fr; /* 1 seul par ligne sur mobile */
+    }
+}
+
+.speaker-card-full {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-smooth);
+}
+
+.speaker-card-full:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+.speaker-profile-img {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+}
+
+.speaker-profile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.country-badge {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background-color: rgba(11, 15, 25, 0.85);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.speaker-profile-details {
+    padding: 24px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.speaker-profile-details h3 {
+    font-family: var(--font-title);
+    font-size: 1.3rem;
+    margin-bottom: 4px;
+}
+
+.speaker-title-job {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+}
+
+.speaker-bio {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Message si aucun résultat */
+.no-results-msg {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    border: 1px dashed var(--border-color);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-secondary);
+}
+
+/* Responsive local */
+@media (max-width: 768px) {
+    .filter-wrapper { flex-direction: column; }
+}

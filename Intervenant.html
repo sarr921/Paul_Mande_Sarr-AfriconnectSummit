@@ -40,9 +40,94 @@
     </header>
 
     <main id="main-content">
-        <section class="container" style="padding: 100px 0;">
-            <p>Structure initiale prête. Fondations du design système activées.</p>
+
+        <section class="internal-hero">
+            <div class="container">
+                <nav class="breadcrumb" aria-label="Fil d'Ariane">
+                    <a href="index.html">Accueil</a> <i class="bi bi-chevron-right"></i> <span>Intervenants</span>
+                </nav>
+                <h1 class="internal-title">Les Leaders de l'Innovation</h1>
+                <p class="internal-subtitle">Rencontrez les esprits brillants, visionnaires et experts internationaux qui partageront leurs connaissances au cours du sommet.</p>
+            </div>
         </section>
+
+        <section class="filter-section container">
+            <div class="filter-wrapper">
+                <div class="search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="speaker-search" placeholder="Rechercher un intervenant, une expertise...">
+                </div>
+                <div class="select-box">
+                    <i class="bi bi-geo-alt"></i>
+                    <select id="speaker-filter-country">
+                        <option value="all">Tous les pays</option>
+                        <option value="Senegal">Sénégal</option>
+                        <option value="Ghana">Ghana</option>
+                        <option value="Nigeria">Nigeria</option>
+                        <option value="RD Congo">RD Congo</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <section class="speakers-gallery container">
+            <div class="speakers-full-grid" id="speakers-grid-container">
+                
+                <article class="speaker-card-full" data-country="Senegal">
+                    <div class="speaker-profile-img">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop" alt="Amina Diop">
+                        <span class="country-badge">🇸🇳 Sénégal</span>
+                    </div>
+                    <div class="speaker-profile-details">
+                        <h3>Amina Diop</h3>
+                        <p class="speaker-title-job">Directrice R&D · Vision IA</p>
+                        <p class="speaker-bio">Spécialiste en traitement automatique des langues appliqués aux dialectes africains.</p>
+                    </div>
+                </article>
+
+                <article class="speaker-card-full" data-country="Ghana">
+                    <div class="speaker-profile-img">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop" alt="Samuel Mensah">
+                        <span class="country-badge">🇬🇭 Ghana</span>
+                    </div>
+                    <div class="speaker-profile-details">
+                        <h3>Samuel Mensah</h3>
+                        <p class="speaker-title-job">Fondateur · AfroPay</p>
+                        <p class="speaker-bio">Pionnier des solutions d'interopérabilité financière transfrontalière en Afrique de l'Ouest.</p>
+                    </div>
+                </article>
+
+                <article class="speaker-card-full" data-country="Nigeria">
+                    <div class="speaker-profile-img">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop" alt="Dr. Nonso Okafor">
+                        <span class="country-badge">🇳🇬 Nigeria</span>
+                    </div>
+                    <div class="speaker-profile-details">
+                        <h3>Dr. Nonso Okafor</h3>
+                        <p class="speaker-title-job">Expert Data Scientist</p>
+                        <p class="speaker-bio">Consultant pour les gouvernements sur le déploiement d'infrastructures de données massives.</p>
+                    </div>
+                </article>
+
+                <article class="speaker-card-full" data-country="RD Congo">
+                    <div class="speaker-profile-img">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" alt="Chantal Munene">
+                        <span class="country-badge">🇨🇩 RD Congo</span>
+                    </div>
+                    <div class="speaker-profile-details">
+                        <h3>Chantal Munene</h3>
+                        <p class="speaker-title-job">Architecte Cloud & Sécurité</p>
+                        <p class="speaker-bio">Spécialiste de la cyber-résilience et de la protection des données d'infrastructure critique.</p>
+                    </div>
+                </article>
+
+            </div>
+
+            <div id="no-results" class="no-results-msg" style="display: none;">
+                <i class="bi bi-exclamation-circle"></i> Aucun intervenant ne correspond à vos critères.
+            </div>
+        </section>
+
     </main>
 
     <footer class="footer-global">

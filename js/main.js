@@ -265,3 +265,54 @@ function initProgramTabs() {
         });
     });
 }
+// ÉTAPE A : Enregistrez le module dans le tableau "modules" au début de votre DOMContentLoaded :
+// { name: "Speaker Filters", func: initSpeakerFilters }
+
+/**
+ * 9. FILTRAGE EN TEMPS RÉEL DES INTERVENANTS
+ * Combine le champ de saisie et la sélection géographique.
+ */
+function initSpeakerFilters() {
+    const searchInput = document.getElementById('speaker-search');
+    const countryFilter = document.getElementById('speaker-filter-country');
+    const speakerCards = document.querySelectorAll('.speaker-card-full');
+    const noResults = document.getElementById('no-results');
+
+    if (!searchInput || !countryFilter || speakerCards.length === 0) return;
+
+    function filterSpeakers() {
+        const searchValue = searchInput.value.toLowerCase().trim();
+        const selectedCountry = countryFilter.value;
+        let visibleCount = 0;
+
+        speakerCards.forEach(card => {
+            // Extraction des données textuelles de la carte
+            const name = card.querySelector('h3').textContent.toLowerCase();
+            const job = card.querySelector('.speaker-title-job').textContent.toLowerCase();
+            const bio = card.querySelector('.speaker-bio').textContent.toLowerCase();
+            const cardCountry = card.getAttribute('data-country');
+
+            // Conditions de correspondance
+            const matchesSearch = name.includes(searchValue) || job.includes(searchValue) || bio.includes(searchValue);
+            const matchesCountry = (selectedCountry === 'all') || (cardCountry === selectedCountry);
+
+            if (matchesSearch && matchesCountry) {
+                card.style.display = 'flex';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Gestion de l'affichage du message "aucun résultat"
+        if (visibleCount === 0) {
+            noResults.style.display = 'block';
+        } else {
+            noResults.style.display = 'none';
+        }
+    }
+
+    // Branchement des écouteurs sur les événements de saisie et de sélection
+    searchInput.addEventListener('input', filterSpeakers);
+    countryFilter.addEventListener('change', filterSpeakers);
+}
