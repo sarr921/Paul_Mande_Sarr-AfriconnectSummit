@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Erreur Initialisation DarkMode:", error); 
     }
 
-    // 2. Initialisation des autres fonctionnalités isolées pour éviter les blocages inter-pages
+    // 2. Liste complète et ordonnée de tous les modules du projet
     const modules = [
         { name: "Navbar Scroll", func: initNavbarScroll },
         { name: "Mobile Menu", func: initMobileMenu },
@@ -19,38 +19,37 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "Countdown", func: initCountdown },
         { name: "Scroll Animations", func: initScrollAnimations },
         { name: "Back To Top", func: initBackToTop },
-        { name: "Program Tabs", func: initProgramTabs }
+        { name: "Program Tabs", func: initProgramTabs },
+        { name: "Speaker Filters", func: initSpeakerFilters },
+        { name: "Contact Form", func: initContactForm },
+        { name: "FAQ Accordion", func: initAccordion }
     ];
 
+    // Initialisation sécurisée inter-pages (évite les plantages si un élément HTML est absent)
     modules.forEach(module => {
         try {
             module.func();
         } catch (error) {
-            // Log discret en console utile pour le développement
-            console.warn(`Module [${module.name}] non chargé sur cette page.`);
+            // Log discret pour le développement
+            console.warn(`Module [${module.name}] non activé sur cette page.`);
         }
     });
 });
 
 /**
  * 1. DARK / LIGHT MODE
- * Gère le stockage local et force la synchronisation de l'état visuel.
  */
 function initDarkMode() {
     const themeToggle = document.getElementById('theme-toggle');
     if (!themeToggle) return;
 
     const icon = themeToggle.querySelector('i');
-    
-    // Récupère le thème enregistré ou applique le mode "dark" par défaut
     const savedTheme = localStorage.getItem('theme');
     const currentTheme = savedTheme || 'dark';
     
-    // Application immédiate au document HTML
     document.documentElement.setAttribute('data-theme', currentTheme);
     updateThemeIcon(icon, currentTheme);
 
-    // Écouteur de clic pour la bascule dynamique
     themeToggle.onclick = function() {
         const activeTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
@@ -64,9 +63,9 @@ function initDarkMode() {
 function updateThemeIcon(iconElement, theme) {
     if (!iconElement) return;
     if (theme === 'dark') {
-        iconElement.className = 'bi bi-sun-fill'; // Affiche le soleil en mode sombre
+        iconElement.className = 'bi bi-sun-fill';
     } else {
-        iconElement.className = 'bi bi-moon-stars-fill'; // Affiche la lune en mode clair
+        iconElement.className = 'bi bi-moon-stars-fill';
     }
 }
 
@@ -265,12 +264,9 @@ function initProgramTabs() {
         });
     });
 }
-// ÉTAPE A : Enregistrez le module dans le tableau "modules" au début de votre DOMContentLoaded :
-// { name: "Speaker Filters", func: initSpeakerFilters }
 
 /**
  * 9. FILTRAGE EN TEMPS RÉEL DES INTERVENANTS
- * Combine le champ de saisie et la sélection géographique.
  */
 function initSpeakerFilters() {
     const searchInput = document.getElementById('speaker-search');
@@ -286,13 +282,11 @@ function initSpeakerFilters() {
         let visibleCount = 0;
 
         speakerCards.forEach(card => {
-            // Extraction des données textuelles de la carte
             const name = card.querySelector('h3').textContent.toLowerCase();
             const job = card.querySelector('.speaker-title-job').textContent.toLowerCase();
             const bio = card.querySelector('.speaker-bio').textContent.toLowerCase();
             const cardCountry = card.getAttribute('data-country');
 
-            // Conditions de correspondance
             const matchesSearch = name.includes(searchValue) || job.includes(searchValue) || bio.includes(searchValue);
             const matchesCountry = (selectedCountry === 'all') || (cardCountry === selectedCountry);
 
@@ -304,7 +298,6 @@ function initSpeakerFilters() {
             }
         });
 
-        // Gestion de l'affichage du message "aucun résultat"
         if (visibleCount === 0) {
             noResults.style.display = 'block';
         } else {
@@ -312,17 +305,12 @@ function initSpeakerFilters() {
         }
     }
 
-    // Branchement des écouteurs sur les événements de saisie et de sélection
     searchInput.addEventListener('input', filterSpeakers);
     countryFilter.addEventListener('change', filterSpeakers);
 }
-// ÉTAPE INTERNE À RAJOUTER DANS LE TABLEAU "modules" AU SOMMET :
-// { name: "Contact Form", func: initContactForm },
-// { name: "FAQ Accordion", func: initAccordion }
 
 /**
  * 10. VALIDATION DU FORMULAIRE DE CONTACT
- * Bloque l'envoi en cas d'erreurs et affiche des retours visuels précis.
  */
 function initContactForm() {
     const form = document.getElementById('contact-form');
@@ -330,14 +318,13 @@ function initContactForm() {
     if (!form || !statusBox) return;
 
     form.addEventListener('submit', (e) => {
-        e.preventDefault(); // Empêche le rechargement par défaut
+        e.preventDefault();
         
         let isFormValid = true;
         const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
 
         inputs.forEach(input => {
             const parent = input.parentElement;
-            // Utilisation de validity check natif HTML5
             if (!input.checkValidity()) {
                 parent.classList.add('invalid');
                 isFormValid = false;
@@ -350,7 +337,7 @@ function initContactForm() {
             statusBox.className = "form-status-box success";
             statusBox.innerHTML = `<i class="bi bi-check-circle-fill"></i> Merci ! Votre message a bien été envoyé avec succès.`;
             statusBox.style.display = "block";
-            form.reset(); // Vide le formulaire
+            form.reset();
         } else {
             statusBox.className = "form-status-box error";
             statusBox.innerHTML = `<i class="bi bi-exclamation-triangle-fill"></i> Veuillez corriger les erreurs dans le formulaire avant l'envoi.`;
@@ -358,7 +345,6 @@ function initContactForm() {
         }
     });
 
-    // Nettoyer l'état d'erreur en temps réel dès que l'utilisateur corrige sa saisie
     form.querySelectorAll('input, select, textarea').forEach(element => {
         element.addEventListener('input', () => {
             if (element.checkValidity()) {
@@ -370,30 +356,40 @@ function initContactForm() {
 
 /**
  * 11. FAQ ACCORDÉON ANIMÉ
- * Calcule dynamiquement la hauteur pour assurer une transition CSS fluide.
  */
 function initAccordion() {
     const headers = document.querySelectorAll('.accordion-header');
     if (headers.length === 0) return;
 
     headers.forEach(header => {
-        header.addEventListener('click', () => {
-            const item = header.parentElement;
+        header.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const item = this.parentElement;
             const collapse = item.querySelector('.accordion-collapse');
             const isActive = item.classList.contains('active');
 
-            // Fermer tous les autres éléments ouverts (Accordéon strict)
+            // Fermer tous les autres accordéons
             document.querySelectorAll('.accordion-item').forEach(otherItem => {
-                otherItem.classList.remove('active');
-                otherItem.querySelector('.accordion-collapse').style.maxHeight = null;
-                otherItem.querySelector('.accordion-header').setAttribute('aria-expanded', 'false');
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                    const otherCollapse = otherItem.querySelector('.accordion-collapse');
+                    if (otherCollapse) {
+                        otherCollapse.style.maxHeight = null;
+                    }
+                    otherItem.querySelector('.accordion-header').setAttribute('aria-expanded', 'false');
+                }
             });
 
-            // Si l'élément cliqué n'était pas actif, on l'ouvre
+            // Basculer l'état de l'élément cliqué
             if (!isActive) {
                 item.classList.add('active');
-                collapse.style.maxHeight = collapse.scrollHeight + "px"; // Hauteur réelle en pixels
-                header.setAttribute('aria-expanded', 'true');
+                collapse.style.maxHeight = collapse.scrollHeight + "px";
+                this.setAttribute('aria-expanded', 'true');
+            } else {
+                item.classList.remove('active');
+                collapse.style.maxHeight = null;
+                this.setAttribute('aria-expanded', 'false');
             }
         });
     });
