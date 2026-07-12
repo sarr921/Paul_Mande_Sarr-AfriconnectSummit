@@ -17,10 +17,10 @@
 
     <header class="header-global">
         <div class="container nav-global">
-    
-<a href="index.html" class="nav-logo" aria-label="AfriConnect Home">
-    <img src="images/logo.jpeg" alt="AfriConnect Summit Logo" style="height: 50px; width: auto;">
-</a>
+            <!-- Logo avec image locale -->
+            <a href="index.html" class="nav-logo" aria-label="AfriConnect Home">
+                <img src="images/logo.jpeg" alt="AfriConnect Summit Logo" style="height: 50px; width: auto;">
+            </a>
             
             <nav class="nav-links" aria-label="Navigation principale">
                 <a href="index.html" class="nav-item active">Accueil</a>
@@ -39,7 +39,6 @@
             </div>
         </div>
     </header>
-    
 
     <main id="main-content">
         
@@ -139,12 +138,12 @@
             <div class="container">
                 <div class="section-header-flex">
                     <h2 class="section-title">Intervenants Vedettes</h2>
-                    <a href="intervenants.html" class="btn btn-secondary btn-sm">Voir tous les speakers <i class="bi bi-arrow-right"></i></a>
+                    <a href="intervenant.html" class="btn btn-secondary btn-sm">Voir tous les speakers <i class="bi bi-arrow-right"></i></a>
                 </div>
                 <div class="speakers-grid">
                     <article class="speaker-card">
                         <div class="speaker-img-wrapper">
-                            <img src="images/ami.jpeg" alt="Amina Diop">
+                            <img src="images/ami.jpeg" alt="Eunice Faye">
                         </div>
                         <div class="speaker-info">
                             <h3>Eunice Faye</h3>
@@ -218,10 +217,11 @@
     <footer class="footer-global">
         <div class="container">
             <div class="footer-grid">
+                
                 <div class="footer-col">
-                    <h4 class="nav-logo">AfriConnect<span>.</span></h4>
-
-<h4 class="nav-logo"><img src="images/logo.jpeg" alt="AfriConnect Summit Logo" style="height: 35px; width: auto;"></h4>
+                    <h4 class="nav-logo">
+                        <img src="images/logo.jpeg" alt="AfriConnect Summit Logo" style="height: 35px; width: auto;">
+                    </h4>
                     <p>Le sommet panafricain incontournable pour les innovateurs, développeurs et investisseurs de la Tech.</p>
                     <div class="footer-socials">
                         <a href="#" aria-label="Twitter X"><i class="bi bi-twitter-x"></i></a>
@@ -229,6 +229,7 @@
                         <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
                     </div>
                 </div>
+                
                 <div class="footer-col">
                     <h4>Navigation</h4>
                     <ul class="footer-links">
@@ -238,6 +239,7 @@
                         <li><a href="contact.html">Contact & Inscription</a></li>
                     </ul>
                 </div>
+                
                 <div class="footer-col">
                     <h4>Contact infos</h4>
                     <p><i class="bi bi-geo-alt-fill"></i> Hybrid / Dakar, Sénégal</p>
@@ -252,6 +254,19 @@
         </div>
     </footer>
 
+    <div id="cookie-banner" class="cookie-banner" style="display: none;">
+        <div class="cookie-content">
+            <i class="bi bi-shield-check-fill cookie-icon"></i>
+            <p>
+                AfriConnect respecte votre vie privée. Nous utilisons des cookies pour optimiser votre expérience et analyser le trafic en toute sécurité.
+            </p>
+            <div class="cookie-actions">
+                <button id="cookie-accept" class="btn btn-primary btn-sm">Accepter</button>
+                <button id="cookie-deny" class="btn btn-secondary btn-sm">Refuser</button>
+            </div>
+        </div>
+    </div>
+    
     <script src="js/main.js"></script>
 </body>
 </html>

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Erreur Initialisation DarkMode:", error); 
     }
 
-    // 2. Liste complète et ordonnée de tous les modules du projet
+    // 2. Liste complète et ordonnée de tous les modules du projet (Raccordée pour le Commit 9)
     const modules = [
         { name: "Navbar Scroll", func: initNavbarScroll },
         { name: "Mobile Menu", func: initMobileMenu },
@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "Program Tabs", func: initProgramTabs },
         { name: "Speaker Filters", func: initSpeakerFilters },
         { name: "Contact Form", func: initContactForm },
-        { name: "FAQ Accordion", func: initAccordion }
+        { name: "FAQ Accordion", func: initAccordion },
+        { name: "Cookie Banner", func: initCookieBanner } // 🚀 Activé ici pour le Commit 9
     ];
 
     // Initialisation sécurisée inter-pages (évite les plantages si un élément HTML est absent)
@@ -393,4 +394,36 @@ function initAccordion() {
             }
         });
     });
+}
+
+/**
+ * 13. GESTION DU CONSENTEMENT DES COOKIES
+ * Enregistre le choix pour éviter d'importuner l'utilisateur à chaque page.
+ */
+function initCookieBanner() {
+    const banner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('cookie-accept');
+    const denyBtn = document.getElementById('cookie-deny');
+
+    if (!banner || !acceptBtn || !denyBtn) return;
+
+    // Vérifie si l'utilisateur a déjà fait un choix
+    const cookieChoice = localStorage.getItem('cookie-consent');
+
+    if (!cookieChoice) {
+        // Affiche la bannière après un léger délai de 1.5s
+        setTimeout(() => {
+            banner.style.display = 'block';
+        }, 1500);
+    }
+
+    acceptBtn.onclick = function() {
+        localStorage.setItem('cookie-consent', 'accepted');
+        banner.style.display = 'none';
+    };
+
+    denyBtn.onclick = function() {
+        localStorage.setItem('cookie-consent', 'denied');
+        banner.style.display = 'none';
+    };
 }
