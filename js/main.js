@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Erreur Initialisation DarkMode:", error); 
     }
 
-    // 2. Liste complète et ordonnée de tous les modules du projet (Raccordée pour le Commit 9)
+    // 2. Liste complète et ordonnée de tous les modules du projet
     const modules = [
         { name: "Navbar Scroll", func: initNavbarScroll },
         { name: "Mobile Menu", func: initMobileMenu },
@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "Speaker Filters", func: initSpeakerFilters },
         { name: "Contact Form", func: initContactForm },
         { name: "FAQ Accordion", func: initAccordion },
-        { name: "Cookie Banner", func: initCookieBanner } // 🚀 Activé ici pour le Commit 9
+        { name: "Cookie Banner", func: initCookieBanner },
+        { name: "Promo Toast", func: initPromoToast } // 🚀 Intégré avec succès pour le Commit 10
     ];
 
     // Initialisation sécurisée inter-pages (évite les plantages si un élément HTML est absent)
@@ -398,7 +399,6 @@ function initAccordion() {
 
 /**
  * 13. GESTION DU CONSENTEMENT DES COOKIES
- * Enregistre le choix pour éviter d'importuner l'utilisateur à chaque page.
  */
 function initCookieBanner() {
     const banner = document.getElementById('cookie-banner');
@@ -407,11 +407,9 @@ function initCookieBanner() {
 
     if (!banner || !acceptBtn || !denyBtn) return;
 
-    // Vérifie si l'utilisateur a déjà fait un choix
     const cookieChoice = localStorage.getItem('cookie-consent');
 
     if (!cookieChoice) {
-        // Affiche la bannière après un léger délai de 1.5s
         setTimeout(() => {
             banner.style.display = 'block';
         }, 1500);
@@ -425,5 +423,48 @@ function initCookieBanner() {
     denyBtn.onclick = function() {
         localStorage.setItem('cookie-consent', 'denied');
         banner.style.display = 'none';
+    };
+}
+
+/**
+ * 14. NOTIFICATION MARKETING TOAST (PROMO POPUP)
+ * Affiche une alerte après 5 secondes et permet de copier un code de réduction.
+ */
+function initPromoToast() {
+    const toast = document.getElementById('promo-toast');
+    const closeBtn = document.getElementById('close-toast');
+    if (!toast || !closeBtn) return;
+
+    // Si l'utilisateur a déjà fermé la promo lors de sa session, on ne l'affiche plus
+    if (sessionStorage.getItem('promo-dismissed')) return;
+
+    // Déclencher l'apparition après 5 secondes (5000ms)
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 5000);
+
+    // Fermer le toast au clic sur la croix
+    closeBtn.onclick = function(e) {
+        e.stopPropagation(); // Évite de déclencher le clic de copie sur le conteneur
+        toast.classList.remove('show');
+        sessionStorage.setItem('promo-dismissed', 'true');
+    };
+
+    // Copier le code dans le presse-papiers lors du clic sur le toast
+    toast.onclick = function() {
+        const codeText = "AFRICONNECT20";
+        navigator.clipboard.writeText(codeText).then(() => {
+            // Modification temporaire du texte pour confirmer la copie
+            const textEl = toast.querySelector('.toast-body p');
+            
+            textEl.innerHTML = `<span style="color: #4ade80;"><i class="bi bi-check-lg"></i> Code couplé avec succès !</span>`;
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                sessionStorage.setItem('promo-dismissed', 'true');
+            }, 1500);
+        }).catch(err => {
+            console.error('Erreur lors de la copie du code: ', err);
+        });
     };
 }

@@ -1280,3 +1280,62 @@ img {
     .cookie-content { flex-direction: column; text-align: center; }
     .cookie-actions { width: 100%; justify-content: center; }
 }
+/* ==========================================================================
+   COMMIT 10 : SYSTÈME DE NOTIFICATION TOAST (MARKETING POPUP)
+   ========================================================================== */
+.toast-notification {
+    position: fixed;
+    bottom: 30px;
+    right: -400px; /* Caché par défaut à droite */
+    background: var(--bg-secondary, #111827);
+    border-left: 4px solid var(--accent, #ff6b00);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 16px 20px;
+    border-radius: var(--radius-md, 8px);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 99999;
+    max-width: 350px;
+    transition: right 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toast-notification.show {
+    right: 30px; /* Position d'affichage */
+}
+
+.toast-icon {
+    font-size: 1.5rem;
+    color: var(--accent, #ff6b00);
+}
+
+.toast-body {
+    flex: 1;
+}
+
+.toast-body h5 {
+    margin: 0 0 4px 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.toast-body p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-muted, #9ca3af);
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.toast-close:hover {
+    color: #ffffff;
+}
