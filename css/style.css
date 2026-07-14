@@ -1339,3 +1339,128 @@ img {
 .toast-close:hover {
     color: #ffffff;
 }
+/* ==========================================================================
+   COMMIT 11 : SYSTÈME DE TICKET VIRTUEL
+   ========================================================================== */
+.ticket-generator-section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.ticket-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    max-width: 500px;
+    margin: 30px auto;
+}
+
+.ticket-actions input {
+    flex: 1;
+    padding: 12px 20px;
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+}
+
+.ticket-card {
+    max-width: 450px;
+    margin: 40px auto 0 auto;
+    background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+    border: 2px solid #ff6b00;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    text-align: left;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.ticket-header {
+    background: rgba(255, 107, 0, 0.1);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed rgba(255, 107, 0, 0.3);
+}
+
+.ticket-badge {
+    background: #ff6b00;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.ticket-logo {
+    font-weight: 800;
+    color: #fff;
+}
+
+.ticket-body {
+    padding: 25px 20px;
+}
+
+.ticket-info {
+    margin-bottom: 20px;
+}
+
+.ticket-info h3 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-top: 5px;
+}
+
+.ticket-meta {
+    display: flex;
+    gap: 40px;
+}
+
+.ticket-card .label {
+    font-size: 0.7rem;
+    color: #9ca3af;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.ticket-card .val {
+    font-size: 0.95rem;
+    color: #fff;
+    font-weight: 600;
+    margin: 3px 0 0 0;
+}
+
+.ticket-footer {
+    background: #0b0f19;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px dashed rgba(255, 107, 0, 0.3);
+}
+
+/* Faux code-barres en CSS purs */
+.ticket-barcode {
+    display: flex;
+    gap: 2px;
+    height: 30px;
+    align-items: center;
+    opacity: 0.7;
+}
+
+.ticket-barcode span {
+    background: #fff;
+    width: 2px;
+    height: 100%;
+}
+.ticket-barcode span:nth-child(2n) { width: 4px; }
+.ticket-barcode span:nth-child(3n) { width: 1px; }
+
+#ticket-serial {
+    font-family: monospace;
+    color: #ff6b00;
+    margin: 0;
+    font-size: 0.9rem;
+}

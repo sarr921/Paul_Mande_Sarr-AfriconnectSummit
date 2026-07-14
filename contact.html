@@ -219,6 +219,52 @@
                 <p>Conçu pour l'excellence numérique en Afrique.</p>
             </div>
         </div>
+
+        </section>
+
+    <section class="ticket-generator-section section-reveal">
+        <div class="container">
+            <h2 class="section-title">Obtenez votre <span>Pass Virtuel</span></h2>
+            <p class="section-subtitle">Générez instantanément votre ticket personnalisé pour l'événement.</p>
+            
+            <div class="ticket-actions">
+                <input type="text" id="ticket-name" placeholder="Entrez votre nom complet">
+                <button id="btn-generate-ticket" class="btn-primary">Générer mon Pass</button>
+            </div>
+
+            <div id="virtual-ticket" class="ticket-card" style="display: none;">
+                <div class="ticket-header">
+                    <span class="ticket-badge">PASS PREMIUM</span>
+                    <span class="ticket-logo">AfriConnect.</span>
+                </div>
+                <div class="ticket-body">
+                    <div class="ticket-info">
+                        <p class="label">PARTICIPANT</p>
+                        <h3 id="ticket-holder-name">John Doe</h3>
+                    </div>
+                    <div class="ticket-meta">
+                        <div>
+                            <p class="label">DATE</p>
+                            <p class="val">12 Nov 2026</p>
+                        </div>
+                        <div>
+                            <p class="label">LIEU</p>
+                            <p class="val">Dakar, Sénégal</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ticket-footer">
+                    <div class="ticket-barcode">
+                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <p id="ticket-serial">#AC-2026-0000</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-global">
+        </footer>
     </footer>
 
     <div id="cookie-banner" class="cookie-banner" style="display: none;">

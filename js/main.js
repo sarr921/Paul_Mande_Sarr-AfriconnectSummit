@@ -468,3 +468,34 @@ function initPromoToast() {
         });
     };
 }
+/**
+ * 15. GÉNÉRATEUR DE TICKET VIRTUEL - COMMIT 11
+ * Génère un pass d'accès unique et personnalisé.
+ */
+function initTicketGenerator() {
+    const btnGenerate = document.getElementById('btn-generate-ticket');
+    const inputName = document.getElementById('ticket-name');
+    const ticketContainer = document.getElementById('virtual-ticket');
+
+    if (!btnGenerate || !inputName || !ticketContainer) return;
+
+    btnGenerate.onclick = function() {
+        const nameValue = inputName.value.trim();
+
+        if (nameValue === "") {
+            alert("Veuillez entrer votre nom pour générer le pass.");
+            inputName.focus();
+            return;
+        }
+
+        // Mettre à jour les données du ticket
+        document.getElementById('ticket-holder-name').textContent = nameValue;
+        
+        // Générer un numéro de série unique aléatoire
+        const randomSerial = Math.floor(1000 + Math.random() * 9000);
+        document.getElementById('ticket-serial').textContent = `#AC-2026-${randomSerial}`;
+
+        // Afficher le ticket avec style
+        ticketContainer.style.display = 'block';
+    };
+}
