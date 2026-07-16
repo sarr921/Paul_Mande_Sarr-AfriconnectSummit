@@ -1464,3 +1464,33 @@ img {
     margin: 0;
     font-size: 0.9rem;
 }
+/* Alignement du titre de la session et de l'étoile */
+.session-title-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-favorite {
+    background: transparent;
+    border: none;
+    color: #9ca3af;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+    padding: 2px 6px;
+}
+
+.btn-favorite:hover {
+    transform: scale(1.2);
+    color: #ffb800;
+}
+
+.btn-favorite.active {
+    color: #ffb800;
+}
+
+.btn-favorite.active i::before {
+    content: "\f586"; /* Remplace l'étoile vide par l'étoile pleine de Bootstrap Icons */
+}

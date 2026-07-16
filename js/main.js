@@ -499,3 +499,40 @@ function initTicketGenerator() {
         ticketContainer.style.display = 'block';
     };
 }
+/**
+ * 16. SYSTÈME DE FAVORIS (MON PROGRAMME) - COMMIT 12
+ * Sauvegarde les sessions préférées dans le localStorage.
+ */
+function initProgramFavorites() {
+    const favoriteButtons = document.querySelectorAll('.btn-favorite');
+    if (favoriteButtons.length === 0) return;
+
+    let favorites = JSON.parse(localStorage.getItem('mySchedule')) || [];
+
+    favoriteButtons.forEach(btn => {
+        const sessionRow = btn.closest('[data-session-id]');
+        if (!sessionRow) return;
+        
+        const sessionId = sessionRow.getAttribute('data-session-id');
+        
+        // Appliquer l'état coché au chargement
+        if (favorites.includes(sessionId)) {
+            btn.classList.add('active');
+        }
+
+        btn.onclick = function(e) {
+            e.stopPropagation(); // Évite tout comportement indésirable de clic sur la ligne
+            btn.classList.toggle('active');
+            
+            if (btn.classList.contains('active')) {
+                if (!favorites.includes(sessionId)) {
+                    favorites.push(sessionId);
+                }
+            } else {
+                favorites = favorites.filter(id => id !== sessionId);
+            }
+
+            localStorage.setItem('mySchedule', JSON.stringify(favorites));
+        };
+    });
+}
